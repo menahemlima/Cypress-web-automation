@@ -1,0 +1,18 @@
+{
+  "html":{
+    "enabled": true
+  },
+    "json": {
+    "enabled": true,
+    "output": "jsonlogs/log.json",
+    "launchReport": true
+  },
+    "messages": {
+    "enabled": true,
+    "output": "jsonlogs/messages.ndjson"
+  },
+  "stepDefinitions": [
+    "cypress/e2e/features/**/*.{js,ts}",
+    "cypress/e2e/step_definitions/**/*.{js,ts}"
+  ]
+}

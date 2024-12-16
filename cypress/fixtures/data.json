@@ -1,0 +1,46 @@
+{
+  "login": {
+    "usuario": "lima0066",
+    "senha": "Pacman@.80?"
+  },
+  "dadosCobranca": {
+    "nome": "Maria",
+    "sobrenome": "das Flores",
+    "pais": "Brazil",
+    "estado": "Santa Catarina",
+    "telefone": "99215-1530",
+    "cep": "88060-239"
+  },
+  "produtos": {
+    "produto_01": {
+      "descricao": "Selenium Ruby",
+      "preco": "500.00",
+      "quantidade": "1",
+      "taxa": "10.00",
+      "total": "500.00"
+    } ,
+    "produto_02": {
+      "descricao": "Thinking in HTML",
+      "preco": "400.00",
+      "quantidade": "1",
+      "taxa": "8.00",
+      "total": "408.00"
+    },  
+    "totalDoisProdutos": {
+      "taxa": "18.00",
+      "total": "918.00"
+    }
+  },
+  "mensagem_error": {
+    "nome": "Billing First Name is a required field.",
+    "sobrenome": "Billing Last Name is a required field.",
+    "email": "Billing Email Address is a required field.",
+    "telefone": "Billing Phone is a required field.",
+    "endereco": "Billing Address is a required field.",
+    "cidade": "Billing Town / City is a required field.",
+    "cep": "Billing Postcode / ZIP is a required field.",
+    "telefoneInvalido": "Phone is not a valid phone number.",
+    "cepInvalido": "Please enter a valid postcode/ZIP."
+  }
+
+}
