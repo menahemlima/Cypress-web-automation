@@ -30,6 +30,7 @@ jobs:
         run: npm run cypress:run
 
       - name: Generate report
+        if: always()
         run: npm run cypress:report
 
       - name: Upload test results
