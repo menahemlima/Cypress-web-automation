@@ -62,7 +62,7 @@ report.generate({
   customData: {
   title: "Run info",
   data: [
-    { label: "Test Project", value: "DOT Relatório - Testes regressivos" },
+    { label: "Test Project", value: "Relatório - Testes regressivos" },
     { label: "Execution Date", value: newDate },
     { label: "Total Execution Time", value: result },
   ],

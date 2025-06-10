@@ -1,7 +1,7 @@
 {
-  "name": "dot_challenge",
+  "name": "automation_web",
   "version": "1.0.0",
-  "description": "Projeto de testes WEB - DOT",
+  "description": "Projeto de testes WEB",
   "main": "index.js",
   "scripts": {
     "cypress:run": "npx cypress run",

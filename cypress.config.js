@@ -23,8 +23,8 @@ module.exports = defineConfig({
       return config
     },
     retries: {
-      runMode: 4,
-      openMode: 4
+      runMode: 0,
+      openMode:04
     },
     specPattern: 'cypress/e2e/features/**/*.feature',
     video: false,
