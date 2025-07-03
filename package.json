@@ -4,7 +4,7 @@
   "description": "Projeto de testes WEB",
   "main": "index.js",
   "scripts": {
-    "cypress:run": "npx cypress run",
+    "cypress:run": "cypress run --reporter json --reporter-options output=jsonlogs/log.json",
     "cypress:open": "cypress open",
     "cypress:report": "node cucumber-html-report.js"
   },

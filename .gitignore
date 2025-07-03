@@ -1,5 +1,6 @@
 node_modules/
 cypress/downloads
 cypress/screenshots
+reports
 jsonlogs/
 *.html

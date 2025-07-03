@@ -1,14 +1,10 @@
-name: Run all Cypress tests
+name: Cypress Docker Test Pipeline
 
 on:
   push:
-    branches:
-      - main
-      - '**/feature/*'
+    branches: [main]
   pull_request:
-    branches:
-      - main
-
+    
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,77 +12,38 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: 'npm'
-
-  install-dependencies:
+  install_dependencies:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: 'npm'
+          node-version: 18          
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Cypress binary
-        run: npx cypress install
-
-      - name: Cache node_modules
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-
-      - name: Cache Cypress binary
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/Cypress
-          key: cypress-${{ runner.os }}-cache
-
-  run-tests:
-    needs: install-dependencies
+  cypress_tests:
+    needs: install_dependencies
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Restore node_modules
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Build Docker image
+        run: docker build -t cypress_automation .
 
-      - name: Restore Cypress binary
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/Cypress
-          key: cypress-${{ runner.os }}-cache
-
-      - name: Run Cypress tests
-        run: npm run cypress:run
-
-      - name: Generate report
-        if: success() || failure()
+      - name: Run Cypress tests in Docker container
         run: |
-          if [ -f ./jsonlogs/log.json ]; then
-            npm run cypress:report
-          else
-            echo "Arquivo log.json não encontrado. Pulando geração de relatório."
-          fi
+          docker run --rm \
+            -v ${{ github.workspace }}:/app \
+            -v /app/node_modules \
+            cypress_automation
 
-      - name: Upload test results
+      - name: Upload Cucumber HTML Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: cypress-reports
-          path: reports/cucumber-htmlreport/**
+          name: cucumber-report
+          path: reports/cucumber-htmlreport/index.html
