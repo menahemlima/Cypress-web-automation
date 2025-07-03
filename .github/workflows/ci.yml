@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,23 +12,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-  install_dependencies:
+  cypress_tests:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18          
-
-      - name: Install dependencies
-        run: npm install
-
-  cypress_tests:
-    needs: install_dependencies
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Build Docker image
@@ -46,4 +34,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: cucumber-report
-          path: reports/cucumber-htmlreport/index.html
+          path: reports/cucumber-htmlreport/
