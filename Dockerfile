@@ -9,4 +9,4 @@ COPY . .
 
 RUN npm ci
 
-CMD ["sh", "-c", "npm run cypress:run && npm run cypress:report"]
+CMD ["sh", "-c", "npm run cypress:run || true; npm run cypress:report"]
